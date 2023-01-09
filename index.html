@@ -199,24 +199,14 @@
             let ul = document.getElementById(`manager${id}`);
             let children = ul.children.length + 1;
             let node = document.createElement("li");
-            node.innerHTML = `<div class='box'><div class='left'><p>Manager ${ul.children.length + 1}</p><p><span class='ticket'>Ticket Count:</span> 0</p> </div><div class='right'><button onclick="addMember(${ul.children.length + 1});">+</button></div></div><ul id="member${ul.children.length + 1}"></ul>`;
+            node.innerHTML = `<div class='box'><div class='left'><p>Manager ${ul.children.length + 1}</p><p><span class='ticket'>Ticket Count:</span> 0</p> </div><div class='right'><button onclick="addMember(${id},${ul.children.length + 1});">+</button></div></div><ul id="manager${id}member${ul.children.length + 1}"></ul>`;
             ul.appendChild(node);
         }
-        function addMember(id) {
-            let ul = document.getElementById(`member${id}`);
+        function addMember(id1, id2) {
+            let ul = document.getElementById(`manager${id1}member${id2}`);
             let children = ul.children.length + 1;
             let node = document.createElement("li");
-            node.innerHTML = `<div class="box">
-                                            <div class="left member">
-                                                <p>Member ${ul.children.length + 1}</p>
-                                            </div>
-
-                                            <div class="right">
-                                                <div class="ticket">
-                                                    <p>Ticket</p><input min="0" value="0" type="number">
-                                                </div>
-                                            </div>
-                                        </div>`;
+            node.innerHTML = `<div class="box"><div class="left member"><p>Member ${ul.children.length + 1}</p></div><div class="right"><div class="ticket"><p>Ticket</p><input min="0" value="0" type="number"></div></div></div>`;
             ul.appendChild(node);
         }
     </script>
