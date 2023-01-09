@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+
+        <ul class="tree">
+
+            <li>
+                <div class="box">
+                    <div class="left">
+                        <p>COO</p>
+                        <p><span class="ticket">Ticket Count:</span> 0</p>
+                    </div>
+
+                    <div id="coo" class="right">
+                        <button id="addData" onclick="addGM();">+</button>
+                    </div>
+                </div>
+                <ul id="gm">
+
+                    <!-- <li>
+                        <div class="box">
+                            <div class="left">
+                                <p>General Manager 1</p>
+                                <p><span class="ticket">Ticket Count:</span> 0</p>
+                            </div>
+
+                            <div class="right">
+                                <button>+</button>
+                            </div>
+                        </div>
+                        <ul>
+
+                            <li>
+                                <div class="box">
+                                    <div class="left">
+                                        <p>Manager 1</p>
+                                        <p><span class="ticket">Ticket Count:</span> 0</p>
+                                    </div>
+
+                                    <div class="right">
+                                        <button>+</button>
+                                    </div>
+                                </div>
+                                <ul>
+
+                                    <li>
+                                        <div class="box">
+                                            <div class="left member">
+                                                <p>Member 1</p>
+                                            </div>
+
+                                            <div class="right">
+                                                <div class="ticket">
+                                                    <p>Ticket</p><input min="0" value="0" type="number">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="box">
+                                            <div class="left member">
+                                                <p>Member 2</p>
+                                            </div>
+
+                                            <div class="right">
+                                                <div class="ticket">
+                                                    <p>Ticket</p><input min="0" value="0" type="number">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="box">
+                                            <div class="left member">
+                                                <p>Member 3</p>
+                                            </div>
+
+                                            <div class="right">
+                                                <div class="ticket">
+                                                    <p>Ticket</p><input min="0" value="0" type="number">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="box">
+                                            <div class="left member">
+                                                <p>Member 4</p>
+                                            </div>
+
+                                            <div class="right">
+                                                <div class="ticket">
+                                                    <p>Ticket</p><input min="0" value="0" type="number">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <div class="box">
+                                    <div class="left">
+                                        <p>Manager 2</p>
+                                        <p><span class="ticket">Ticket Count:</span> 0</p>
+                                    </div>
+
+                                    <div class="right">
+                                        <button>+</button>
+                                    </div>
+                                </div>
+                                <ul>
+                                    <li>
+                                        <div class="box">
+                                            <div class="left member">
+                                                <p>Member 1</p>
+                                            </div>
+
+                                            <div class="right">
+                                                <div class="ticket">
+                                                    <p>Ticket</p><input min="0" value="0" type="number">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="box">
+                                            <div class="left member">
+                                                <p>Member 2</p>
+                                            </div>
+
+                                            <div class="right">
+                                                <div class="ticket">
+                                                    <p>Ticket</p><input min="0" value="0" type="number">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li> 
+                    <li>
+                        <div class="box">
+                            <div class="left">
+                                <p>General Manager 2</p>
+                                <p><span class="ticket">Ticket Count:</span> 0</p>
+                            </div>
+
+                            <div class="right">
+                                <button>+</button>
+                            </div>
+                        </div>
+                        <ul>
+
+                            <li>
+                                <div class="box">
+                                    <div class="left">
+                                        <p>Manager 1</p>
+                                        <p><span class="ticket">Ticket Count:</span> 0</p>
+                                    </div>
+
+                                    <div class="right">
+                                        <button>+</button>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li> -->
+
+                </ul>
+            </li>
+
+        </ul>
+
+
+    </div>
+    <script>
+        function addGM() {
+            // var input = document.getElementById("myInput").value;
+            // if (input != "") {
+            let ul = document.getElementById("gm");
+            let children = ul.children.length + 1;
+            let node = document.createElement("li");
+            node.innerHTML = `<div class='box'><div class='left'><p>General Manager ${ul.children.length + 1}</p><p><span class='ticket'>Ticket Count:</span> 0</p> </div><div class='right'><button onclick="addManager(${ul.children.length + 1});">+</button></div></div><ul id="manager${ul.children.length + 1}"></ul>`;
+            ul.appendChild(node);
+        }
+
+        function addManager(id) {
+            let ul = document.getElementById(`manager${id}`);
+            let children = ul.children.length + 1;
+            let node = document.createElement("li");
+            node.innerHTML = `<div class='box'><div class='left'><p>Manager ${ul.children.length + 1}</p><p><span class='ticket'>Ticket Count:</span> 0</p> </div><div class='right'><button onclick="addMember(${ul.children.length + 1});">+</button></div></div><ul id="member${ul.children.length + 1}"></ul>`;
+            ul.appendChild(node);
+        }
+        function addMember(id) {
+            let ul = document.getElementById(`member${id}`);
+            let children = ul.children.length + 1;
+            let node = document.createElement("li");
+            node.innerHTML = `<div class="box">
+                                            <div class="left member">
+                                                <p>Member ${ul.children.length + 1}</p>
+                                            </div>
+
+                                            <div class="right">
+                                                <div class="ticket">
+                                                    <p>Ticket</p><input min="0" value="0" type="number">
+                                                </div>
+                                            </div>
+                                        </div>`;
+            ul.appendChild(node);
+        }
+    </script>
+</body>
+
+</html>
