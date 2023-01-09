@@ -26,157 +26,6 @@
                     </div>
                 </div>
                 <ul id="gm">
-
-                    <!-- <li>
-                        <div class="box">
-                            <div class="left">
-                                <p>General Manager 1</p>
-                                <p><span class="ticket">Ticket Count:</span> 0</p>
-                            </div>
-
-                            <div class="right">
-                                <button>+</button>
-                            </div>
-                        </div>
-                        <ul>
-
-                            <li>
-                                <div class="box">
-                                    <div class="left">
-                                        <p>Manager 1</p>
-                                        <p><span class="ticket">Ticket Count:</span> 0</p>
-                                    </div>
-
-                                    <div class="right">
-                                        <button>+</button>
-                                    </div>
-                                </div>
-                                <ul>
-
-                                    <li>
-                                        <div class="box">
-                                            <div class="left member">
-                                                <p>Member 1</p>
-                                            </div>
-
-                                            <div class="right">
-                                                <div class="ticket">
-                                                    <p>Ticket</p><input min="0" value="0" type="number">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="box">
-                                            <div class="left member">
-                                                <p>Member 2</p>
-                                            </div>
-
-                                            <div class="right">
-                                                <div class="ticket">
-                                                    <p>Ticket</p><input min="0" value="0" type="number">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="box">
-                                            <div class="left member">
-                                                <p>Member 3</p>
-                                            </div>
-
-                                            <div class="right">
-                                                <div class="ticket">
-                                                    <p>Ticket</p><input min="0" value="0" type="number">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="box">
-                                            <div class="left member">
-                                                <p>Member 4</p>
-                                            </div>
-
-                                            <div class="right">
-                                                <div class="ticket">
-                                                    <p>Ticket</p><input min="0" value="0" type="number">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <div class="box">
-                                    <div class="left">
-                                        <p>Manager 2</p>
-                                        <p><span class="ticket">Ticket Count:</span> 0</p>
-                                    </div>
-
-                                    <div class="right">
-                                        <button>+</button>
-                                    </div>
-                                </div>
-                                <ul>
-                                    <li>
-                                        <div class="box">
-                                            <div class="left member">
-                                                <p>Member 1</p>
-                                            </div>
-
-                                            <div class="right">
-                                                <div class="ticket">
-                                                    <p>Ticket</p><input min="0" value="0" type="number">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="box">
-                                            <div class="left member">
-                                                <p>Member 2</p>
-                                            </div>
-
-                                            <div class="right">
-                                                <div class="ticket">
-                                                    <p>Ticket</p><input min="0" value="0" type="number">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li> 
-                    <li>
-                        <div class="box">
-                            <div class="left">
-                                <p>General Manager 2</p>
-                                <p><span class="ticket">Ticket Count:</span> 0</p>
-                            </div>
-
-                            <div class="right">
-                                <button>+</button>
-                            </div>
-                        </div>
-                        <ul>
-
-                            <li>
-                                <div class="box">
-                                    <div class="left">
-                                        <p>Manager 1</p>
-                                        <p><span class="ticket">Ticket Count:</span> 0</p>
-                                    </div>
-
-                                    <div class="right">
-                                        <button>+</button>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </li> -->
-
                 </ul>
             </li>
 
@@ -186,21 +35,20 @@
     </div>
     <script>
         function addGM() {
-            // var input = document.getElementById("myInput").value;
-            // if (input != "") {
             let ul = document.getElementById("gm");
             let children = ul.children.length + 1;
             let node = document.createElement("li");
             node.innerHTML = `<div class='box'><div class='left'><p>General Manager ${ul.children.length + 1}</p><p><span class='ticket'>Ticket Count:</span> 0</p> </div><div class='right'><button onclick="addManager(${ul.children.length + 1});">+</button></div></div><ul id="manager${ul.children.length + 1}"></ul>`;
             ul.appendChild(node);
+            window.scrollBy(0, document.body.scrollHeight);
         }
-
         function addManager(id) {
             let ul = document.getElementById(`manager${id}`);
             let children = ul.children.length + 1;
             let node = document.createElement("li");
             node.innerHTML = `<div class='box'><div class='left'><p>Manager ${ul.children.length + 1}</p><p><span class='ticket'>Ticket Count:</span> 0</p> </div><div class='right'><button onclick="addMember(${id},${ul.children.length + 1});">+</button></div></div><ul id="manager${id}member${ul.children.length + 1}"></ul>`;
             ul.appendChild(node);
+            window.scrollBy(0, document.body.scrollHeight);
         }
         function addMember(id1, id2) {
             let ul = document.getElementById(`manager${id1}member${id2}`);
@@ -208,6 +56,7 @@
             let node = document.createElement("li");
             node.innerHTML = `<div class="box"><div class="left member"><p>Member ${ul.children.length + 1}</p></div><div class="right"><div class="ticket"><p>Ticket</p><input min="0" value="0" type="number"></div></div></div>`;
             ul.appendChild(node);
+            window.scrollBy(0, document.body.scrollHeight);
         }
     </script>
 </body>
