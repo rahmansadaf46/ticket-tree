@@ -19,7 +19,7 @@
                 <div class="box">
                     <div class="left">
                         <p>COO</p>
-                        <p><span class="ticket">Ticket Count:</span> 0</p>
+                        <p><span class="ticket">Ticket Count:</span> <span>0</span></p>
                     </div>
 
                     <div id="coo" class="right">
@@ -65,7 +65,7 @@
             gm.push({gmID: children , ticketCount: 0, manager:[]})
             console.log(gm)
             let node = document.createElement("li");
-            node.innerHTML = `<div class='box'><div class='left'><p>General Manager ${children}</p><p><span class='ticket'>Ticket Count:</span> 0</p> </div><div class='right'><button onclick="addManager(${children});">+</button></div></div><ul id="manager${children}"></ul>`;
+            node.innerHTML = `<div class='box'><div class='left'><p>General Manager ${children}</p><p><span class='ticket'>Ticket Count:</span> <span>0</span></p> </div><div class='right'><button onclick="addManager(${children});">+</button></div></div><ul id="manager${children}"></ul>`;
             ul.appendChild(node);
             window.scrollBy(0, document.body.scrollHeight);
         }
@@ -75,7 +75,7 @@
             gm.filter(el=> el.gmID === id)[0].manager?.push({ managerID: children, ticketCount: 0, member: [] })
              console.log(gm)
             let node = document.createElement("li");
-            node.innerHTML = `<div class='box'><div class='left'><p>Manager ${children}</p><p><span class='ticket'>Ticket Count:</span> 0</p> </div><div class='right'><button onclick="addMember(${id},${children});">+</button></div></div><ul id="GM${id}manager${children}"></ul>`;
+            node.innerHTML = `<div class='box'><div class='left'><p>Manager ${children}</p><p><span class='ticket'>Ticket Count:</span> <span>0</span> </p> </div><div class='right'><button onclick="addMember(${id},${children});">+</button></div></div><ul id="GM${id}manager${children}"></ul>`;
             ul.appendChild(node);
             window.scrollBy(0, document.body.scrollHeight);
         }
@@ -85,11 +85,14 @@
             gm.filter(el => el.gmID === gmID)[0].manager.filter(el => el.managerID === managerID)[0].member?.push({ memberID: children, ticketCount: 0 })
                console.log(gm)
             let node = document.createElement("li");
-            node.innerHTML = `<div class="box"><div class="left member"><p>Member ${children}</p></div><div class="right"><div class="ticket"><p>Ticket</p> <div class="quantity buttons_added"><input type="button" value="-" class="minus"><input readOnly type="number" step="1" min="0" max="" name="quantity" value="0" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus"></div></div></div></div>`;
+            node.innerHTML = `<div class="box"><div class="left member"><p>Member ${children}</p></div><div class="right"><div class="ticket"><p>Ticket</p> <div class="quantity buttons_added"><input type="button" value="-" class="minus"><input readOnly type="number" step="1" min="0" max="" name="quantity" value="0" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input onClick="addTicket(${gmID},${managerID},${children})" type="button" value="+" class="plus"></div></div></div></div>`;
             ul.appendChild(node);
             window.scrollBy(0, document.body.scrollHeight);
         }
-  
+        
+        function addTicket(gmID, managerID, memberID){
+            console.log(gmID, managerID, memberID)
+        }
     </script>
 </body>
 
