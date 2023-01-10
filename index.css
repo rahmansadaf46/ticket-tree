@@ -118,12 +118,9 @@ button:hover {
     color: white;
 }
 
-
 .member{
     margin-top: 15px;
 }
-
-/* -- quantity box -- */
 
 .quantity {
  display: inline-block; }
