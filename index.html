@@ -6,20 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="index.css">
-    <title>Document</title>
-      
+    <title>Ticket Count</title>
+
 </head>
 
 <body>
     <div>
-
         <ul class="tree">
-
             <li>
                 <div class="box">
                     <div class="left">
                         <p>COO</p>
-                        <p><span class="ticket">Ticket Count:</span> <span>0</span></p>
+                        <p><span class="ticket">Ticket Count:</span> <span id="CooTicket">0</span></p>
                     </div>
 
                     <div id="coo" class="right">
@@ -29,14 +27,12 @@
                 <ul id="gm">
                 </ul>
             </li>
-
         </ul>
-
-
     </div>
-<script data-require="jquery@3.1.1" data-semver="3.1.1" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script data-require="jquery@3.1.1" data-semver="3.1.1"
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script>
-       function wcqib_refresh_quantity_increments() {
+        function wcqib_refresh_quantity_increments() {
             jQuery("div.quantity:not(.buttons_added), td.quantity:not(.buttons_added)").each(function (a, b) {
                 var c = jQuery(b);
                 c.addClass("buttons_added"), c.children().first().before('<input type="button" value="-" class="minus" />'), c.children().last().after('<input type="button" value="+" class="plus" />')
@@ -58,24 +54,25 @@
                 e = a.attr("step");
             b && "" !== b && "NaN" !== b || (b = 0), "" !== c && "NaN" !== c || (c = ""), "" !== d && "NaN" !== d || (d = 0), "any" !== e && "" !== e && void 0 !== e && "NaN" !== parseFloat(e) || (e = 1), jQuery(this).is(".plus") ? c && b >= c ? a.val(c) : a.val((b + parseFloat(e)).toFixed(e.getDecimals())) : d && b <= d ? a.val(d) : b > 0 && a.val((b - parseFloat(e)).toFixed(e.getDecimals())), a.trigger("change")
         });
-        let gm = [{cooTicket: 0}];
+
+        let gm = [];
         function addGM() {
             let ul = document.getElementById("gm");
             let children = ul.children.length + 1;
-            gm.push({gmID: children , ticketCount: 0, manager:[]})
+            gm.push({ gmID: children, manager: [] })
             console.log(gm)
             let node = document.createElement("li");
-            node.innerHTML = `<div class='box'><div class='left'><p>General Manager ${children}</p><p><span class='ticket'>Ticket Count:</span> <span>0</span></p> </div><div class='right'><button onclick="addManager(${children});">+</button></div></div><ul id="manager${children}"></ul>`;
+            node.innerHTML = `<div class='box'><div class='left'><p>General Manager ${children}</p><p><span class='ticket'>Ticket Count:</span> <span id='ticketCountGM${children}'>0</span></p> </div><div class='right'><button onclick="addManager(${children});">+</button></div></div><ul id="manager${children}"></ul>`;
             ul.appendChild(node);
             window.scrollBy(0, document.body.scrollHeight);
         }
         function addManager(id) {
             let ul = document.getElementById(`manager${id}`);
             let children = ul.children.length + 1;
-            gm.filter(el=> el.gmID === id)[0].manager?.push({ managerID: children, ticketCount: 0, member: [] })
-             console.log(gm)
+            gm.filter(el => el.gmID === id)[0].manager?.push({ managerID: children, member: [] })
+            console.log(gm)
             let node = document.createElement("li");
-            node.innerHTML = `<div class='box'><div class='left'><p>Manager ${children}</p><p><span class='ticket'>Ticket Count:</span> <span>0</span> </p> </div><div class='right'><button onclick="addMember(${id},${children});">+</button></div></div><ul id="GM${id}manager${children}"></ul>`;
+            node.innerHTML = `<div class='box'><div class='left'><p>Manager ${children}</p><p><span class='ticket'>Ticket Count:</span> <span id="ticketCountManger${children}GM${id}">0</span> </p> </div><div class='right'><button onclick="addMember(${id},${children});">+</button></div></div><ul id="GM${id}manager${children}"></ul>`;
             ul.appendChild(node);
             window.scrollBy(0, document.body.scrollHeight);
         }
@@ -83,15 +80,35 @@
             let ul = document.getElementById(`GM${gmID}manager${managerID}`);
             let children = ul.children.length + 1;
             gm.filter(el => el.gmID === gmID)[0].manager.filter(el => el.managerID === managerID)[0].member?.push({ memberID: children, ticketCount: 0 })
-               console.log(gm)
+            console.log(gm)
             let node = document.createElement("li");
-            node.innerHTML = `<div class="box"><div class="left member"><p>Member ${children}</p></div><div class="right"><div class="ticket"><p>Ticket</p> <div class="quantity buttons_added"><input type="button" value="-" class="minus"><input readOnly type="number" step="1" min="0" max="" name="quantity" value="0" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input onClick="addTicket(${gmID},${managerID},${children})" type="button" value="+" class="plus"></div></div></div></div>`;
+            node.innerHTML = `<div class="box"><div class="left member"><p>Member ${children}</p></div><div class="right"><div class="ticket"><p>Ticket</p> <div class="quantity buttons_added"><input onClick="removeTicket(${gmID},${managerID},${children})" type="button" value="-" class="minus"><input readOnly type="number" step="1" min="0" max="" name="quantity" value="0" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input onClick="addTicket(${gmID},${managerID},${children})" type="button" value="+" class="plus"></div></div></div></div>`;
             ul.appendChild(node);
             window.scrollBy(0, document.body.scrollHeight);
         }
-        
-        function addTicket(gmID, managerID, memberID){
+        function addTicket(gmID, managerID, memberID) {
             console.log(gmID, managerID, memberID)
+            let CooTicket = document.getElementById(`CooTicket`);
+            let GMTicket = document.getElementById(`ticketCountGM${gmID}`);
+            let managerTicket = document.getElementById(`ticketCountManger${managerID}GM${gmID}`);
+            CooTicket.innerText = parseInt(CooTicket.innerText) + 1;
+            GMTicket.innerText = parseInt(GMTicket.innerText) + 1;
+            managerTicket.innerText = parseInt(managerTicket.innerText) + 1;
+        }
+        function removeTicket(gmID, managerID, memberID) {
+            console.log(gmID, managerID, memberID)
+            let CooTicket = document.getElementById(`CooTicket`);
+            let GMTicket = document.getElementById(`ticketCountGM${gmID}`);
+            let managerTicket = document.getElementById(`ticketCountManger${managerID}GM${gmID}`);
+            if (parseInt(CooTicket.innerText) > 0) {
+                CooTicket.innerText = parseInt(CooTicket.innerText) - 1;
+            }
+            if (parseInt(GMTicket.innerText) > 0) {
+                GMTicket.innerText = parseInt(GMTicket.innerText) - 1;
+            }
+            if (parseInt(managerTicket.innerText) > 0) {
+                managerTicket.innerText = parseInt(managerTicket.innerText) - 1;
+            }
         }
     </script>
 </body>
